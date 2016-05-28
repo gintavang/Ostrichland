@@ -1,27 +1,79 @@
+require_relative "util.rb"
+
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
 # ~~~$$$~~~Abstract classes~~~$$$~~~#
 
 class Entity
 
-  # Constructors need to be changed,
-  # but they are enough for now.
-  def initialize(name)
-    @name = name
-    @max_hp = 5
-    @hp = 3
-  end
-
-  def initialize(name, max_hp, hp)
+  # Change constructor...
+  def initialize(name, max_hp = 5, hp = 3)
     @name = name
     @max_hp = max_hp
     @hp = hp
+    @inventory = []
+    @gold = 0
+  end
+
+  # Adds the item and the given amount to the inventory.
+  def add_item(item, amount)
+    # Check if the Entity already has that item
+    # in the inventory. If so, just increase
+    # the amount.
+    @inventory.each do |couple|
+      if (couple.first == item)
+        couple.second += amount
+        return
+      end
+    end
+    # If not already in the inventory, push a Couple.
+    @inventory.push(Couple.new(item, amount))
+  end
+
+  # Returns the number of that item
+  # currently in the user's inventory.
+  def count_item(name)
+    inventory.each do |couple|
+      if (couple.first == name)
+        return couple.second
+      end
+    end
+    return 0
+  end
+
+  # Removes the item and, at most, the given amount
+  # from the inventory
+  def remove_item(name, amount)
+    # Check if the Entity already has that item
+    # in the inventory. If so, just decrease
+    # the amount.
+    @inventory.each_with_index do |couple, index|
+      if (couple.first == name)
+        couple.second -= amount
+        if (couple.second <= 0)
+          @inventory.delete_at(index)
+        end
+        return
+      end
+    end
+  end
+
+  # Prints the inventory in a nice format.
+  def print_inventory
+    @inventory.each do |couple|
+      puts couple.first + " (#{couple.second})"
+    end
   end
 
   # Automatically creates getter and setter methods.
   attr_accessor :name
-  attr_accessor :max_hp
-  attr_accessor :hp
+  attr_accessor :max_hp, :hp
+
+  # The inventory is stored as an array
+  # of Couple objects. The first data type
+  # is the item's name. The second data type
+  # is its count in the inventory.
+  attr_accessor :inventory, :gold
 
 end
 
@@ -42,10 +94,18 @@ class Item
     end
   end
 
-  def use
-    raise "Cannot use abstract item!"
+  def use(entity)
+    puts "Nothing happens."
   end
 
+  attr_accessor :name, :price
+
+end
+
+class Bait < Item
+  def use(entity)
+    puts "This should be used at a fishing spot."
+  end
 end
 
 class Food < Item
@@ -64,10 +124,46 @@ class Food < Item
 
 end
 
+# ~~~$$$~~~Baits~~~$$$~~~#
+
+class Chub < Bait
+  # Used for Raw Weakfish.
+  def initialize
+    @name = "Chub"
+    @price = 3
+  end
+end
+
 # ~~~$$$~~~Foods~~~$$$~~~#
 
 class Banana < Food
   def initialize
+    @name = "Banana"
+    @price = 2
     @recovers = 2
+  end
+end
+
+# ~~~$$$~~~Items~~~$$$~~~#
+
+class Bucket < Item
+  def initialize
+    @name = "Bucket"
+    @price = 2
+  end
+end
+
+class FishingPole < Item
+  def initialize
+    @name = "Fishing Pole"
+    @price = 15
+  end
+end
+
+class Fuel < Item
+  # Override use on boat's Tile?
+  def initialize
+    @name = "Fuel"
+    @price = 30
   end
 end
