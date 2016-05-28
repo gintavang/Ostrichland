@@ -1,3 +1,6 @@
+require_relative 'map.rb'
+require_relative "../src/util.rb"
+
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
 # ~~~$$$~~~Abstract classes~~~$$$~~~#
@@ -22,6 +25,55 @@ class Entity
   attr_accessor :name
   attr_accessor :max_hp
   attr_accessor :hp
+
+end
+
+class Player < Entity
+
+  def initialize(name)
+    @name = name
+    @max_hp = 100
+    @hp = 100
+    @map = Map.create(:zdrasvootyay)
+    @location = Couple.new(1,5)
+  end
+
+  attr_accessor :map, :location
+
+  def move(direction)
+    case direction
+    when "w"
+      if @map.tiles[@location.first][@location.second - 1].passable
+        @location.second -= 1
+      else
+        puts "You can't go that way!"
+        #print possible directions
+      end
+    when "e"
+      if @map.tiles[@location.first][@location.second + 1].passable
+        @location.second += 1
+      else
+        puts "You can't go that way!"
+        #print possible directions
+      end
+    when "n"
+      if @map.tiles[@location.first - 1][@location.second].passable
+        @location.first -= 1
+      else
+        puts "You can't go that way!"
+        #print possible directions
+      end
+    when "s"
+      if @map.tiles[@location.first + 1][@location.second].passable
+        @location.first += 1
+      else
+        puts "You can't go that way!"
+        #print possible directions
+      end
+    else 
+      puts "That ain't no D-recshun"
+    end
+  end
 
 end
 
