@@ -2,6 +2,10 @@ require_relative 'event.rb'
 
 class Shop < Event
 
+  def initialize
+    @command = "shop"
+  end
+
   # Returns the index of the item, if it exists.
   # Otherwise, returns -1.
   def has_item(name)
@@ -13,6 +17,7 @@ class Shop < Event
     return -1
   end
 
+  # Displays a formatted list of the Shop's items.
   def print_items
     @items.each do |item|
       puts item.name + " (#{item.price} gold)"
@@ -98,8 +103,6 @@ class Shop < Event
   end
 
   attr_accessor :name, :items
-
-  @command = "shop"
 
 end
 

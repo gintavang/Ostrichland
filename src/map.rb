@@ -1,5 +1,5 @@
+require_relative 'event.rb'
 require_relative 'tile.rb'
-#require 'test/unit'
 
 class Map
 	#place - town/region in the Map

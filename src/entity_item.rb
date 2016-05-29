@@ -1,6 +1,5 @@
 require_relative "util.rb"
-require_relative 'map.rb'
-
+require_relative enttiy -> 'map.rb'
 
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
@@ -153,10 +152,10 @@ class Player < Entity
     @map.tiles[@location.first + 1][@location.second + 1].seen = true
     @map.tiles[@location.first - 1][@location.second + 1].seen = true
     #cardinal directions
-    @map.tiles[@location.first][@location.second + 1].seen = true 
-    @map.tiles[@location.first][@location.second - 1].seen = true 
-    @map.tiles[@location.first - 1][@location.second].seen = true 
-    @map.tiles[@location.first + 1][@location.second].seen = true  
+    @map.tiles[@location.first][@location.second + 1].seen = true
+    @map.tiles[@location.first][@location.second - 1].seen = true
+    @map.tiles[@location.first - 1][@location.second].seen = true
+    @map.tiles[@location.first + 1][@location.second].seen = true
  end
 
   def print_player_map
@@ -176,7 +175,7 @@ class Player < Entity
     puts ""
     end
   end
-  
+
 end
 
 # %%%%%-----ITEM SECTION-----%%%%% #
