@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+#<<<<<<< HEAD
 require_relative "util.rb"
-=======
+#=======
 require_relative 'map.rb'
 require_relative "../src/util.rb"
->>>>>>> 66c009bc450e8fdc3abe5abd10ae9f79b3e8d3d1
+#>>>>>>> 66c009bc450e8fdc3abe5abd10ae9f79b3e8d3d1
 
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
@@ -90,6 +90,7 @@ class Player < Entity
     @hp = 100
     @map = Map.create(:zdrasvootyay)
     @location = Couple.new(1,5)
+    update_player_map
   end
 
   attr_accessor :map, :location
@@ -99,6 +100,7 @@ class Player < Entity
     when "w"
       if @map.tiles[@location.first][@location.second - 1].passable
         @location.second -= 1
+        update_player_map
       else
         puts "You can't go that way!"
         #print possible directions
@@ -106,6 +108,7 @@ class Player < Entity
     when "e"
       if @map.tiles[@location.first][@location.second + 1].passable
         @location.second += 1
+        update_player_map
       else
         puts "You can't go that way!"
         #print possible directions
@@ -113,6 +116,7 @@ class Player < Entity
     when "n"
       if @map.tiles[@location.first - 1][@location.second].passable
         @location.first -= 1
+        update_player_map
       else
         puts "You can't go that way!"
         #print possible directions
@@ -120,6 +124,7 @@ class Player < Entity
     when "s"
       if @map.tiles[@location.first + 1][@location.second].passable
         @location.first += 1
+        update_player_map
       else
         puts "You can't go that way!"
         #print possible directions
@@ -129,6 +134,39 @@ class Player < Entity
     end
   end
 
+  #call after each move
+  def update_player_map
+    @map.tiles[@location.first][location.second].seen = true
+    #corners
+    @map.tiles[@location.first + 1][@location.second - 1].seen = true
+    @map.tiles[@location.first - 1][@location.second - 1].seen = true
+    @map.tiles[@location.first + 1][@location.second + 1].seen = true
+    @map.tiles[@location.first - 1][@location.second + 1].seen = true
+    #cardinal directions
+    @map.tiles[@location.first][@location.second + 1].seen = true 
+    @map.tiles[@location.first][@location.second - 1].seen = true 
+    @map.tiles[@location.first - 1][@location.second].seen = true 
+    @map.tiles[@location.first + 1][@location.second].seen = true  
+ end
+
+  def print_player_map
+    puts ""
+    @map.tiles.each do |sub|
+      sub.each do |tile|
+        if tile.seen
+          if tile.passable
+            print "•"
+          else
+            print "#"
+          end
+        else
+          print " "
+        end
+      end
+    puts ""
+    end
+  end
+  
 end
 
 # %%%%%-----ITEM SECTION-----%%%%% #
