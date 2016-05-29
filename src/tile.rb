@@ -10,9 +10,7 @@ class Tile
 		#@people = people
 		#@monsters = monster
 	end
-	
+
 	attr_accessor :passable, :seen
 
 end
-
-

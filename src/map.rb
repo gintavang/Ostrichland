@@ -19,7 +19,7 @@ class Map
       sub.each do |tile|
         if tile.passable
           print "1"
-        else 
+        else
           print "0"
         end
       end
@@ -32,7 +32,7 @@ class Map
 end
 
 class Zdrasvootyay < Map
-	
+
 	def initialize
 
 		@tiles = [
@@ -92,9 +92,3 @@ class Zdrasvootyay < Map
 		]
 	end
 end
-
-
-
-
-
-

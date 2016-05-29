@@ -1,25 +1,21 @@
-class Shop
+require_relative 'event.rb'
 
-  def self.create(id)
-    case id
-    when :zdras_shop
-      ZdrasShop.new
-    else
-      ZdrasShop.new
-    end
-  end
+class Shop < Event
 
+  # Returns the index of the item, if it exists.
+  # Otherwise, returns -1.
   def has_item(name)
-    @items.each do |item|
+    @items.each_with_index do |item, index|
       if (item.name == name)
-        return true
+        return index
       end
     end
+    return -1
   end
 
   def print_items
     @items.each do |item|
-      puts item.name + " : " + item.price.to_s + " gold"
+      puts item.name + " (#{item.price} gold)"
     end
   end
 
@@ -35,12 +31,12 @@ class Shop
         print "What would you like (or none): "
 
         name = gets.chomp
+        index = has_item(name)
 
         if (name == "none")
-          puts "test"
         # This check prevents creating a fake item.
-        elsif (has_item(name))
-          item = Item.create(name)
+        elsif (index != -1)
+          item = @items[index]
           print "How many do you want?: "
           amount_to_buy = gets.chomp
           total_cost = amount_to_buy.to_i * item.price
@@ -50,8 +46,14 @@ class Shop
             puts "You don't have enough gold!"
           # Otherwise, add the item(s) and subtract the gold.
           else
-            entity.gold -= total_cost
-            entity.add_item(name, amount_to_buy)
+            # Checks that the Entity wants to buy at least 1.
+            if (amount_to_buy.to_i < 1)
+              puts "Is this some kind of joke?"
+              puts "You need to request a positive amount!"
+            else
+              entity.gold -= total_cost
+              entity.add_item(item, amount_to_buy.to_i)
+            end
           end
         else
           puts "I don't have #{name}!"
@@ -61,23 +63,28 @@ class Shop
         entity.print_inventory
 
         print "What would you like to sell? (or none): "
-        input = gets.chomp
-        inventory_count = entity.count_item(input)
+        name = gets.chomp
+        index = entity.has_item_by_string(name)
 
-        if (input == "none")
-          puts "test"
+        if (name == "none")
         # This check ensures that the Entity has such an item.
-        elsif (inventory_count > 0)
-          item = Item.create(input)
+        elsif ((index > -1) && (item_count = entity.inventory[index].second) > 0)
+          item = entity.inventory[index].first
           puts "I'll buy that for " + (item.price / 2).to_s
           print "How many do you want to sell?: "
           amount_to_sell = gets.chomp
 
-          if (amount_to_sell > inventory_count)
+          if (amount_to_sell.to_i > item_count)
             puts "You don't have that many to sell!"
           else
-            entity.gold += (item.price / 2) * amount_to_sell
-            entity.remove_item(name, amount_to_sell)
+            # Checks that the Entity wants to buy at least 1.
+            if (amount_to_sell.to_i < 1)
+              puts "Is this some kind of joke?"
+              puts "You need to sell a positive amount!"
+            else
+              entity.gold += (item.price / 2) * amount_to_sell.to_i
+              entity.remove_item(item, amount_to_sell.to_i)
+            end
           end
 
         else
@@ -91,6 +98,9 @@ class Shop
   end
 
   attr_accessor :name, :items
+
+  @command = "shop"
+
 end
 
 class ZdrasShop < Shop
