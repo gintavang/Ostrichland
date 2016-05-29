@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 require_relative "util.rb"
-=======
 require_relative 'map.rb'
-require_relative "../src/util.rb"
->>>>>>> 66c009bc450e8fdc3abe5abd10ae9f79b3e8d3d1
 
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
@@ -35,25 +31,38 @@ class Entity
     @inventory.push(Couple.new(item, amount))
   end
 
-  # Returns the number of that item
-  # currently in the user's inventory.
-  def count_item(name)
-    inventory.each do |couple|
-      if (couple.first == name)
-        return couple.second
+  # Requires an Item as the argument.
+  # Returns the index of that item, if it exists.
+  # Otherwise, returns -1.
+  def has_item_by_object(item)
+    inventory.each_with_index do |couple, index|
+      if (couple.first == item)
+        return index
       end
     end
-    return 0
+    return -1
+  end
+
+  # Requires a String as the argument.
+  # Returns the index of that item, if it exists.
+  # Otherwise, returns -1.
+  def has_item_by_string(name)
+    inventory.each_with_index do |couple, index|
+      if (couple.first.name == name)
+        return index
+      end
+    end
+    return -1
   end
 
   # Removes the item and, at most, the given amount
   # from the inventory
-  def remove_item(name, amount)
+  def remove_item(item, amount)
     # Check if the Entity already has that item
     # in the inventory. If so, just decrease
     # the amount.
     @inventory.each_with_index do |couple, index|
-      if (couple.first == name)
+      if (couple.first == item)
         couple.second -= amount
         if (couple.second <= 0)
           @inventory.delete_at(index)
@@ -66,7 +75,7 @@ class Entity
   # Prints the inventory in a nice format.
   def print_inventory
     @inventory.each do |couple|
-      puts couple.first + " (#{couple.second})"
+      puts couple.first.name + " (#{couple.second})"
     end
   end
 
@@ -124,7 +133,7 @@ class Player < Entity
         puts "You can't go that way!"
         #print possible directions
       end
-    else 
+    else
       puts "That ain't no D-recshun"
     end
   end
@@ -137,19 +146,13 @@ end
 
 class Item
 
-  # Needs to check id in a different way.
-  # Perhaps the hash of a string?
-  def self.create(id)
-    case id
-    when "Banana"
-      Banana.new
-    else
-      Banana.new
-    end
-  end
-
   def use(entity)
     puts "Nothing happens."
+  end
+
+  # Equality operator.
+  def ==(rhs)
+    return (@name == rhs.name)
   end
 
   attr_accessor :name, :price
