@@ -67,4 +67,45 @@ class TestEntityMovement < Test::Unit::TestCase
 		assert_equal(5, player.location.second)
   end
 
+  #test partial reveal
+  def test_player_map_partial
+  	player = Player.new("player1")
+
+  	player.print_player_map
+
+  									###
+		#map->					••#
+		#								••# 
+  	
+
+  	player.move("w"); player.move("s"); player.move("w")
+
+			 			 		 ####
+								#•••#
+		#map->			••••#
+			      		#•••
+
+  	player.print_player_map
+  	
+  end
+
+  #test full reveal of map
+  def test_player_map_full
+  	player = Player.new("player1")
+
+  	player.print_player_map
+
+  	player.move("s"); player.move("s"); player.move("w");
+  	player.move("n"); player.move("n"); player.move("w");
+  	player.move("s"); player.move("s"); player.move("n");
+  	player.move("w"); player.move("w"); player.move("n");
+  	player.move("s"); player.move("s"); player.move("s");
+  	player.move("e"); player.move("s"); player.move("e");
+  	player.move("e"); player.move("s"); player.move("s");
+  	player.move("e");
+
+  	player.print_player_map
+
+  end
+
 end
