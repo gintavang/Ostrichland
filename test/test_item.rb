@@ -1,5 +1,6 @@
 require "test/unit"
-require_relative "../src/entity_item.rb"
+require_relative "../src/Entity/entity.rb"
+require_relative "../src/Item/food.rb"
 
 class TestFoodRecovery < Test::Unit::TestCase
 

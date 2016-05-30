@@ -1,5 +1,10 @@
 require "test/unit"
-require_relative "../src/entity_item.rb"
+require_relative "../src/Entity/entity.rb"
+require_relative "../src/Entity/player.rb"
+require_relative "../src/Item/bait.rb"
+require_relative "../src/Item/food.rb"
+require_relative "../src/Item/item.rb"
+require_relative "../src/util.rb"
 
 class TestAddItem < Test::Unit::TestCase
 
@@ -138,8 +143,8 @@ class TestEntityMovement < Test::Unit::TestCase
 
   									###
 		#map->					••#
-		#								••# 
-  	
+		#								••#
+
 
   	player.move("w"); player.move("s"); player.move("w")
 
@@ -149,7 +154,7 @@ class TestEntityMovement < Test::Unit::TestCase
 			      		#•••
 
   	player.print_player_map
-  	
+
   end
 
   #test full reveal of map

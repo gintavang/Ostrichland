@@ -1,6 +1,5 @@
 require "test/unit"
 require_relative "../src/Map/map_zdrasvootyay.rb"
-require_relative "../src/entity_item.rb"
 
 class TestMap < Test::Unit::TestCase
 
