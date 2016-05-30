@@ -1,5 +1,5 @@
-require_relative "util.rb"
-require_relative enttiy -> 'map.rb'
+require_relative 'util.rb'
+require_relative 'Map/map_zdrasvootyay.rb'
 
 # %%%%%-----ENTITY SECTION-----%%%%% #
 
@@ -97,7 +97,7 @@ class Player < Entity
     @name = name
     @max_hp = 100
     @hp = 100
-    @map = Map.create(:zdrasvootyay)
+    @map = Zdrasvootyay.new
     @location = Couple.new(1,5)
     update_player_map
   end

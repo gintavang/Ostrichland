@@ -1,4 +1,4 @@
-require_relative 'event.rb'
+require_relative '../event.rb'
 
 class Shop < Event
 
@@ -104,11 +104,4 @@ class Shop < Event
 
   attr_accessor :name, :items
 
-end
-
-class ZdrasShop < Shop
-  def initialize
-    @name = "The Zdras Shop"
-    @items = [Bucket.new, Chub.new, FishingPole.new, Fuel.new]
-  end
 end

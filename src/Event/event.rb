@@ -1,5 +1,3 @@
-require_relative 'entity_item.rb'
-
 class Event
 
   def run(entity)

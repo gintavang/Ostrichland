@@ -1,6 +1,6 @@
 require "test/unit"
 require_relative "../src/entity_item.rb"
-require_relative "../src/plant.rb"
+require_relative "../src/Event/plant.rb"
 
 class TestBananaTree < Test::Unit::TestCase
 

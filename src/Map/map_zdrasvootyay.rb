@@ -1,35 +1,6 @@
-require_relative 'event.rb'
+require_relative '../Event/NPC/npc_zdrasvootyay.rb'
+require_relative 'map.rb'
 require_relative 'tile.rb'
-
-class Map
-	#place - town/region in the Map
-	def self.create(place)
-		case place
-			#starting island
-			when :zdrasvootyay
-				Zdrasvootyay.new
-			#else
-				#Zdrasvootyay.new
-		end
-	end
-
-	def print_map
-    puts ""
-    @tiles.each do |sub|
-      sub.each do |tile|
-        if tile.passable
-          print "1"
-        else
-          print "0"
-        end
-      end
-    puts ""
-    end
-  end
-
-	attr_accessor :tiles
-
-end
 
 class Zdrasvootyay < Map
 
@@ -67,9 +38,11 @@ class Zdrasvootyay < Map
 		  ],
 
 		  #5
-		  [Tile.new(false), Tile.new(false), Tile.new(true),
-		   Tile.new(true), Tile.new(true), Tile.new(false),
-		   Tile.new(false)
+		  [Tile.new(false), Tile.new(false),
+			 Tile.new(true, [Fisherwoman.new]),
+		   Tile.new(true),
+			 Tile.new(true, [Fisherman.new]),
+			 Tile.new(false),Tile.new(false)
 		  ],
 
 		  #6
