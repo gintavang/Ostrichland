@@ -1,19 +1,26 @@
 class Map
 
 	def print_map
-    puts ""
+    #greeting
+    puts "\nYou're in " + @name + "!\n\n";
     @tiles.each do |sub|
+      #centers map under the greeting
+      for i in 1..(name.length/2)
+        print " "
+      end
       sub.each do |tile|
         if tile.passable
-          print "1"
+          print "•"
         else
-          print "0"
+          print "#"
         end
       end
     puts ""
     end
+    puts "\n• - passable space" +
+         "\n# - impassable space"
   end
 
-	attr_accessor :tiles
+	attr_accessor :tiles, :name
 
 end

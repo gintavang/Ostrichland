@@ -67,24 +67,39 @@ class Player < Entity
     @map.tiles[@location.first][@location.second - 1].seen = true
     @map.tiles[@location.first - 1][@location.second].seen = true
     @map.tiles[@location.first + 1][@location.second].seen = true
- end
+  end
 
   def print_player_map
-    puts ""
+    
+    puts "\nYou're in " + @map.name + "!\n\n"
+    row_count = 0
     @map.tiles.each do |sub|
+      #centers each row under the "welcome" sign
+      for i in 1..(@map.name.length/2)
+        print " "
+      end
+      col_count = 0
       sub.each do |tile|
         if tile.seen
           if tile.passable
-            print "•"
+            if row_count == @location.first && col_count == @location.second
+              print "¶"
+            else
+              print "•"
+            end
           else
             print "#"
           end
         else
           print " "
         end
+        col_count += 1
       end
-    puts ""
+      row_count += 1
+      puts ""
     end
+    puts "\n• - passable space" +
+         "\n# - impassable space" +
+         "\n¶ - your location"
   end
-
 end

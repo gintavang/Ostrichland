@@ -5,7 +5,8 @@ require_relative 'tile.rb'
 class Zdrasvootyay < Map
 
 	def initialize
-
+		@name = "Zdrasvootyay"
+		
 		@tiles = [
 
 			#0 top border
