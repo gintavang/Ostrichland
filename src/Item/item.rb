@@ -34,3 +34,10 @@ class Fuel < Item
     @price = 30
   end
 end
+
+class RussianDictionary < Item
+  def initialize
+    @name = "Russian-English Dictionary"
+    @price = 0
+  end
+end

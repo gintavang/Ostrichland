@@ -19,7 +19,7 @@ class Zdrasvootyay < Map
 
 		  #1
 		  [Tile.new(false),
-			 Tile.new(true, [BananaTree.new]),
+			 Tile.new(true, [BananaDictionaryTree.new]),
 			 Tile.new(false),
 		   Tile.new(true), Tile.new(true), Tile.new(true),
 		   Tile.new(false)
@@ -55,7 +55,7 @@ class Zdrasvootyay < Map
 
 		  #6
 		  [Tile.new(false), Tile.new(false), Tile.new(false),
-		   Tile.new(false), Tile.new(true), Tile.new(false),
+		   Tile.new(false), Tile.new(true, [Russian.new]), Tile.new(false),
 		   Tile.new(false)
 		  ],
 
