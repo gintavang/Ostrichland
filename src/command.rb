@@ -18,7 +18,7 @@ end
 def print_possible_moves(player)
   y = player.location.first
   x = player.location.second
-  puts "\nWhere to?\n---------\n"
+  puts "Where to?\n---------\n"
   if player.map.tiles[y - 1][x].passable
     print "north (n); "
   end

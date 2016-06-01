@@ -12,4 +12,5 @@ while (input != "q")
   prompt(player)
   print "> "
   input = gets.chomp
+  puts "\n"
 end
