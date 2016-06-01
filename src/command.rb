@@ -68,11 +68,11 @@ end
 def prompt(player)
   tile = player.map.tiles[player.location.first][player.location.second]
   puts tile.description
+  print_possible_moves(player)
   if (tile.events.length > 0)
     puts "~~$$$~~Special commands~~$$$~~"
     tile.events.each do |event|
       puts "#{event.command}; "
     end
   end
-  print_possible_moves(player)
 end
