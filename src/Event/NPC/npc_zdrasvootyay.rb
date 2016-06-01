@@ -60,7 +60,7 @@ class Russian < NPC
       puts "\nWell, you don't speak Russian. Time to move on..."
     else
       puts "Don't buyeen a fyoul from theet stoor!"
-      puts "I seal fyoul own the chip!" 
+      puts "I seal fyoul own the chip!"
       puts "I've only one geellen\n................."
       puts "But, eef theets yoor bowt at th end of the pier"
       puts "Eet should to geeting you where you are gooing"
@@ -70,12 +70,12 @@ class Russian < NPC
         puts "Ind that well be 5 rubles, спасибо"
         if (entity.gold >= 5)
           entity.gold -= 5
-          entity.add_item("Russian-English Dictionary", 1)
+          entity.add_item(Fuel.new, 1)
           puts "You shake his large, greasy hand"
           puts "And head back down the road."
           puts "You notice that, even with the gallon of fuel,"
           puts "Your load feels much lighter"
-          entity.remove_item("Russian-English Dictionary", 1)
+          entity.remove_item(RussianDictionary.new, 1)
         else
           puts "Ой! Какой Кошмар... I should have been knowing you'll were broke!"
           puts "And eet I was right to think you are a kozël. Пошёл на хуй!"
@@ -89,11 +89,3 @@ class Russian < NPC
     end
   end
 end
-
-
-
-
-
-
-
-

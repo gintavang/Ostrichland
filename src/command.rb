@@ -36,7 +36,6 @@ def print_possible_moves(player)
   end
   print "\n"
 end
-     
 
 
 def interpret_command(command, player)
@@ -67,7 +66,7 @@ end
 # Prompts the player after each move.
 def prompt(player)
   tile = player.map.tiles[player.location.first][player.location.second]
-  puts tile.description
+  # puts tile.description
   print_possible_moves(player)
   if (tile.events.length > 0)
     puts "~~$$$~~Special commands~~$$$~~"
