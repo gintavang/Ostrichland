@@ -15,6 +15,30 @@ def help(player)
   end
 end
 
+def print_possible_moves(player)
+  y = player.location.first
+  x = player.location.second
+  puts "\nWhere to?\n---------\n"
+  if player.map.tiles[y - 1][x].passable
+    print "north (n); "
+  end
+
+  if player.map.tiles[y][x + 1].passable
+    print "east (e); "
+  end
+
+  if player.map.tiles[y + 1][x].passable
+    print "south (s); "
+  end
+
+  if player.map.tiles[y][x - 1].passable
+    print "west (w);"
+  end
+  print "\n"
+end
+     
+
+
 def interpret_command(command, player)
   # Default commands.
   case(command)
