@@ -5,7 +5,7 @@ require_relative '../util.rb'
 class Player < Entity
 
   def initialize(name)
-    @name = name
+    super
     @max_hp = 100
     @hp = 100
     @map = Zdrasvootyay.new
@@ -70,7 +70,7 @@ class Player < Entity
   end
 
   def print_player_map
-    
+
     puts "\nYou're in " + @map.name + "!\n\n"
     row_count = 0
     @map.tiles.each do |sub|

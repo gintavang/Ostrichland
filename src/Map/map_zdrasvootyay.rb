@@ -1,4 +1,6 @@
 require_relative '../Event/NPC/npc_zdrasvootyay.rb'
+require_relative '../Event/Shop/shop_zdrasvootyay.rb'
+require_relative '../Event/plant.rb'
 require_relative 'map.rb'
 require_relative 'tile.rb'
 
@@ -16,7 +18,9 @@ class Zdrasvootyay < Map
 		  ],
 
 		  #1
-		  [Tile.new(false), Tile.new(true), Tile.new(false),
+		  [Tile.new(false),
+			 Tile.new(true, [BananaTree.new]),
+			 Tile.new(false),
 		   Tile.new(true), Tile.new(true), Tile.new(true),
 		   Tile.new(false)
 		  ],
@@ -27,8 +31,11 @@ class Zdrasvootyay < Map
 		   Tile.new(false)
 		  ],
 		  #3
-		  [Tile.new(false), Tile.new(true), Tile.new(false),
-		   Tile.new(true), Tile.new(true), Tile.new(true),
+		  [Tile.new(false),
+			 Tile.new(true, [BananaTree.new]), 
+			 Tile.new(false),
+		   Tile.new(true, [ZdrasShop.new]),
+			 Tile.new(true), Tile.new(true),
 		   Tile.new(false)
 		  ],
 

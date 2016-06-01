@@ -1,4 +1,5 @@
 require_relative 'event.rb'
+require_relative '../Item/food.rb'
 
 class Plant < Event
 
@@ -24,6 +25,7 @@ end
 
 class BananaTree < Plant
   def initialize
+    super
     @fruit = Banana.new
     @number = 5
   end
