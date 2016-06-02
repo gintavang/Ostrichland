@@ -5,7 +5,7 @@ require_relative '../../Item/item.rb'
 # Location: [3,3]
 class ZdrasShop < Shop
   def initialize
-    super # Calls the parent's method of the same name.
+    super
     @name = "The Zdras Shop"
     @items = [Bucket.new, Chub.new, FishingPole.new, Fuel.new]
   end

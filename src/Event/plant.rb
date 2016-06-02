@@ -4,6 +4,7 @@ require_relative '../Item/food.rb'
 class Plant < Event
 
   def initialize
+    super
     @command = "pick"
   end
 
@@ -56,7 +57,6 @@ class BananaDictionaryTree < BananaTree
       @number -= 1
       puts "There are no fruits left here!"
     end
-  end 
+  end
 
 end
-

@@ -5,10 +5,10 @@ def help(player)
   puts "n (north); s (south);"
   puts "e (east); w (west);"
   puts "help; map; inv; use [item]"
-  tile = player.map.tiles[player.location.first][player.location.second]
-  if (tile.events.length > 0)
+  events = player.map.tiles[player.location.first][player.location.second].events
+  if (!(events.empty?))
     puts "~~$$$~~Special commands~~$$$~~"
-    tile.events.each do |event|
+    events.each do |event|
       print "#{event.command}; "
     end
     print "\n"
@@ -54,9 +54,9 @@ def interpret_command(command, player)
   end
 
   # Other commands.
-  tile = player.map.tiles[player.location.first][player.location.second]
-  tile.events.each do |event|
-    if (command == event.command)
+  events = player.map.tiles[player.location.first][player.location.second].events
+  events.each do |event|
+    if (event.visible && command == event.command)
       event.run(player)
       return
     end
@@ -65,13 +65,15 @@ end
 
 # Prompts the player after each move.
 def prompt(player)
-  tile = player.map.tiles[player.location.first][player.location.second]
+  events = player.map.tiles[player.location.first][player.location.second].events
   # puts tile.description
   print_possible_moves(player)
-  if (tile.events.length > 0)
+  if (!(events.empty?) && events.any? { |event| event.visible })
     puts "~~$$$~~Special commands~~$$$~~"
-    tile.events.each do |event|
-      puts "#{event.command}; "
+    events.each do |event|
+      if (event.visible)
+        puts "#{event.command}; "
+      end
     end
   end
 end

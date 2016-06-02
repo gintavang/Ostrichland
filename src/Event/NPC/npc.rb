@@ -3,6 +3,7 @@ require_relative '../event.rb'
 class NPC < Event
 
   def initialize
+    super
     @command = "talk"
   end
 

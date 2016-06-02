@@ -4,7 +4,7 @@ require_relative 'npc.rb'
 class Fisherman < NPC
 
   def initialize
-    super # Calls the parent's method of the same name.
+    super
     @name = "Fisherman"
   end
 
@@ -47,6 +47,7 @@ class Fisherwoman < NPC
   end
 end
 
+# Location: [6,4]
 class Russian < NPC
   def initialize
     super

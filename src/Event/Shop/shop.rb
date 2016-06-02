@@ -3,6 +3,7 @@ require_relative '../event.rb'
 class Shop < Event
 
   def initialize
+    super
     @command = "shop"
   end
 
