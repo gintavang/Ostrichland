@@ -35,16 +35,14 @@ end
 class BananaDictionaryTree < BananaTree
   def initialize
     super
-    @dictionary = RussianDictionary.new
   end
 
   def run(entity)
-    if (@number > 0)
-      puts "You pick a #{@fruit.name}."
-      entity.add_item(@fruit, 1)
-      @number -= 1
-    elsif (@number == -1)
-      #functions in "story"
+    case (@mode)
+    when 0
+      if (@number == 0) then @mode = 1 end
+      super
+    when 1
       puts "As you greedily stare up into the tree"
       puts "You hear a loud crack, and a massive book"
       puts "crashes down on your head"
@@ -52,10 +50,10 @@ class BananaDictionaryTree < BananaTree
       puts "'Russian to English Dictionary'"
       puts "It's not likely you'll need something like that,"
       puts "But hey, you might find some use for it at some point"
-      entity.add_item(@dictionary, 1)
-    elsif (@number == 0 || @number < -1)
-      @number -= 1
-      puts "There are no fruits left here!"
+      entity.add_item(RussianDictionary.new, 1)
+      @mode = 2
+    when 2
+      super
     end
   end
 
