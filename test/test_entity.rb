@@ -222,16 +222,16 @@ class TestRemoveItem < Test::Unit::TestCase
 
     entity.add_item(Banana.new, 3)
     entity.add_item(Bucket.new, 4)
-    entity.add_item(Chub.new, 5)
+    entity.add_item(Worm.new, 5)
 
     entity.remove_item(Bucket.new, 4)
     entity.remove_item(Banana.new, 2)
-    entity.remove_item(Chub.new, 6)
+    entity.remove_item(Worm.new, 6)
 
     count = entity.inventory[entity.has_item_by_string("Banana")].second
     assert_equal(1, count)
     assert_equal(-1, entity.has_item_by_string("Bucket"))
-    assert_equal(-1, entity.has_item_by_string("Chub"))
+    assert_equal(-1, entity.has_item_by_string("Worm"))
 
     assert_equal(1, entity.inventory.length)
   end

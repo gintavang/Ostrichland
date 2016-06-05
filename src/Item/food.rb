@@ -12,6 +12,10 @@ class Food < Item
     if (entity.hp > entity.max_hp)
       entity.hp = entity.max_hp
     end
+
+  # Removes the item from the Entity's inventory.
+  # Must be specified whenever the item is consumable.
+  entity.remove_item(self, 1)
   end
 
 end

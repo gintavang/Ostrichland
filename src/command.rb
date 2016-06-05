@@ -37,20 +37,34 @@ def print_possible_moves(player)
   print "\n"
 end
 
-
 def interpret_command(command, player)
-  # Default commands.
-  case(command)
-  when "w", "e", "n", "s"
-    player.move(command)
-  when "help"
-    help(player)
-  when "map"
-    player.print_player_map
-  when "inv"
-    player.print_inventory
-  when "use"
-    #not sure how use [item] will work yet.
+  words = command.split
+
+  # Default ommands that take multiple "arguments" (words).
+  if (words.size > 1)
+    case(words[0])
+    when "use"
+      name = words[1]
+      for i in 2..(words.size - 1) do
+        name << " " << words[i]
+      end
+      player.use_item_by_string(name, player)
+    end
+    
+  # Single-word default commands.
+  else
+    case(command)
+    when "w", "e", "n", "s"
+      player.move(command)
+    when "help"
+      help(player)
+    when "map"
+      player.print_player_map
+    when "inv"
+      player.print_inventory
+    when "status"
+      player.print_status
+    end
   end
 
   # Other commands.

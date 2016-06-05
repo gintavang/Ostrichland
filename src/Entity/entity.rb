@@ -79,6 +79,22 @@ class Entity
     end
   end
 
+  # Prints the status in a nice format.
+  def print_status
+    puts "HP: #{hp}/#{max_hp}"
+  end 
+
+  # If the item exists in the Entity's inventory,
+  # then it uses the item on Entity e.
+  def use_item_by_string(name, e)
+    index = has_item_by_string(name)
+    if (index != -1)
+      inventory[index].first.use(e)
+    else
+      puts "What?! You don't have #{name}!"
+    end
+  end
+
   # Automatically creates getter and setter methods.
   attr_accessor :name
   attr_accessor :max_hp, :hp
