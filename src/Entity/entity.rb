@@ -4,7 +4,7 @@ class Entity
 
   # Change constructor...
   def initialize(name, max_hp = 5, hp = 3,
-    inventory = [], gold = 0)
+    inventory = [], attacks = [], gold = 0)
     @name = name
     @max_hp = max_hp
     @hp = hp
@@ -12,6 +12,8 @@ class Entity
     # Monsters can also use items in battle.
     @inventory = inventory
 
+    @attacks = attacks
+    
     # Monsters might drop a percentage of this value.
     @gold = gold
   end
@@ -78,6 +80,17 @@ class Entity
       puts couple.first.name + " (#{couple.second})"
     end
   end
+
+  def attempt_attack(attack, enemy)
+    if (Random.rand(100) < attack.success_rate)
+      enemy.hp -= attack.damage
+      print attack.name + " was successful and\n"
+      print "it brought " + enemy.name + "'s HP down to " enemy.hp
+    else
+      print attack.name + " failed."
+    end
+  end
+
 
   # Automatically creates getter and setter methods.
   attr_accessor :name
