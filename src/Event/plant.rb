@@ -45,13 +45,13 @@ class BananaDictionaryTree < BananaTree
       @number -= 1
     elsif (@number == -1)
       #functions in "story"
-      puts "As you greedily stare up into the tree"
-      puts "You hear a loud crack, and a massive book"
-      puts "crashes down on your head"
-      puts "When you regain your wits, you read the cover"
-      puts "'Russian to English Dictionary'"
+      puts "As you greedily stare up into the now-bananaless tree,"
+      puts "you hear a loud crack, and a massive book"
+      print "crashes down on your head.\n\n"
+      print "When you regain your wits, you read the cover:\n\n"
+      puts "'Russian to English Dictionary'\n\n"
       puts "It's not likely you'll need something like that,"
-      puts "But hey, you might find some use for it at some point"
+      print "But hey, you might find some use for it at some point./n\n"
       entity.add_item(@dictionary, 1)
     elsif (@number == 0 || @number < -1)
       @number -= 1
