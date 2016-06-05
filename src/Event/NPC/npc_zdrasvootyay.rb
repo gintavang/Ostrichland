@@ -78,8 +78,9 @@ class Russian < NPC
           puts "Your load feels much lighter"
           entity.remove_item(RussianDictionary.new, 1)
         else
-          puts "Ой! Какой Кошмар... I should have been knowing you'll were broke!"
-          puts "And eet I was right to think you are a kozël. Пошёл на хуй!"
+          puts "Ой! Какой Кошмар... I should have been knowing"
+          puts "you'll were broke! And eet I was right to think"
+          print "you are a kozël. Пошёл на хуй!\n"
           puts "\nYou quickly high-tail it back to the road,"
           puts "as the relatively even tempered Russian fuel salesman"
           puts "continues to lob obscenities and small fish at you from afar."
