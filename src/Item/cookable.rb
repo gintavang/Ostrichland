@@ -1,3 +1,4 @@
+require_relative 'food.rb'
 require_relative 'item.rb'
 
 class Cookable < Item
