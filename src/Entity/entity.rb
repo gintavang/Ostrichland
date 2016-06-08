@@ -77,12 +77,13 @@ class Entity
     @inventory.each do |couple|
       puts couple.first.name + " (#{couple.second})"
     end
+    print "\n"
   end
 
   # Prints the status in a nice format.
   def print_status
     puts "HP: #{hp}/#{max_hp}"
-  end 
+  end
 
   # If the item exists in the Entity's inventory,
   # then it uses the item on Entity e.

@@ -50,7 +50,7 @@ def interpret_command(command, player)
       end
       player.use_item_by_string(name, player)
     end
-    
+
   # Single-word default commands.
   else
     case(command)
@@ -61,6 +61,7 @@ def interpret_command(command, player)
     when "map"
       player.print_player_map
     when "inv"
+      puts "Your inventory:"
       player.print_inventory
     when "status"
       player.print_status

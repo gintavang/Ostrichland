@@ -20,7 +20,7 @@ class Pool < Event
           puts "#{bait.first.name} (#{bait.second})"
         end
 
-        print "Which bait will you use?: "
+        print "\nWhich bait will you use?: "
         input = gets.chomp
         index = entity.has_item_by_string(input)
 
@@ -33,27 +33,27 @@ class Pool < Event
             if (@baits.any? { |bait| bait == item } )
               float = rand
               if (float > 0.5)
-                puts "Wow! You caught a #{item.catches.name}!"
+                print "\nWow! You caught a #{item.catches.name}!\n\n"
                 entity.add_item(item.catches, 1)
               else
-                puts "Nothing takes the bait!"
+                print "\nNothing takes the bait!\n\n"
               end
             else
-              puts "Nothing takes the bait!"
+              print "\nNothing takes the bait!\n\n"
             end
             entity.remove_item(item, 1)
           else
-            puts "That can't be used as bait!!"
+            print "\nThat can't be used as bait!!\n\n"
           end
         else
-          puts "You don't have #{input}!"
+          print "\nYou don't have #{input}!\n\n"
         end
 
       else
-        puts "Are you mad? Where's your bait?"
+        print "Are you mad? Where's your bait?\n\n"
       end
     else
-      puts "You don't have a Fishing Pole! Tsk tsk..."
+      print "You don't have a Fishing Pole! Tsk tsk...\n\n"
     end
   end
 

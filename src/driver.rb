@@ -6,6 +6,7 @@ player = Player.new("Player1")
 prompt(player)
 print "> "
 input = gets.chomp
+puts "\n"
 
 while (input != "q")
   interpret_command(input, player)

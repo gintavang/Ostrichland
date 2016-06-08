@@ -18,7 +18,7 @@ class Stove < Event
         puts "#{bait.first.name} (#{bait.second})"
       end
 
-      print "What would you like to cook?: "
+      print "\nWhat would you like to cook?: "
       input = gets.chomp
       index = entity.has_item_by_string(input)
 
@@ -46,23 +46,25 @@ class Stove < Event
               end
             end
 
+            print "\n"
             print_results(item.first.cooked_variant.name, total_cooked, total_burnt)
+            print "\n"
 
             # Update the Entity's inventory.
             entity.remove_item(item.first, input.to_i)
             entity.add_item(item.first.cooked_variant, total_cooked)
             entity.add_item(BurntFlub.new, total_burnt)
           else
-            puts "That's not acceptable input!"
+            print "\nThat's not acceptable input!\n\n"
           end
         else
-          puts "It's not a good idea to cook that!!"
+          print "\nIt's not a good idea to cook that!!\n\n"
         end
       else
-        puts "You don't have #{input}!"
+        print "\nYou don't have #{input}!\n\n"
       end
     else
-      puts "There's nothing to cook in your pouch!"
+      print "There's nothing to cook in your pouch!\n\n"
     end
   end
 

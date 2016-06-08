@@ -10,11 +10,11 @@ class Plant < Event
 
   def run(entity)
     if (@number > 0)
-      puts "You pick a #{@fruit.name}."
+      print "You pick a #{@fruit.name}.\n\n"
       entity.add_item(@fruit, 1)
       @number -= 1
     else
-      puts "There are no fruits left here!"
+      print "There are no fruits left here!\n\n"
     end
   end
 
@@ -50,7 +50,7 @@ class BananaDictionaryTree < BananaTree
       print "When you regain your wits, you read the cover:\n\n"
       puts "'Russian to English Dictionary'\n\n"
       puts "It's not likely you'll need something like that,"
-      print "But hey, you might find some use for it at some point./n\n"
+      print "But hey, you might find some use for it at some point.\n\n"
       entity.add_item(RussianDictionary.new, 1)
       @mode = 2
     when 2

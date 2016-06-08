@@ -31,10 +31,11 @@ class Shop < Event
     puts "Current gold in your pouch: #{entity.gold}."
     print "Would you like to buy, sell, or exit?: "
     input = gets.chomp
+    print "\n"
 
     while (input != "exit")
       if (input == "buy")
-        print "\nPlease take a look at my wares.\n\n"
+        print "Please take a look at my wares.\n\n"
         print_items
         print "What would you like (or none)?: "
 
@@ -70,10 +71,10 @@ class Shop < Event
         end
       elsif (input == "sell")
         if (!entity.inventory.empty?)
-          puts "\nYour inventory:"
+          puts "Your inventory:"
           entity.print_inventory
 
-          print "\nWhat would you like to sell? (or none): "
+          print "What would you like to sell? (or none): "
           name = gets.chomp
           index = entity.has_item_by_string(name)
 
@@ -105,13 +106,12 @@ class Shop < Event
         else
           print "\nYou have nothing to sell!!\n\n"
         end
-      else
-        print "\n"
       end
 
       puts "Current gold in your pouch: #{entity.gold}."
       print "Would you like to buy, sell, or exit?: "
       input = gets.chomp
+      print "\n"
     end
   end
 
