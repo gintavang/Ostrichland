@@ -84,11 +84,24 @@ def prompt(player)
   # puts tile.description
   print_possible_moves(player)
   if (!(events.empty?) && events.any? { |event| event.visible })
+    # Use the counter so there are only 4 commands per line.
+    counter = 0
     puts "~~$$$~~Special commands~~$$$~~"
     events.each do |event|
+      # Print the corresponding command and increment the counter.
       if (event.visible)
-        puts "#{event.command}; "
+        print "#{event.command}; "
+        counter += 1
       end
+      # Restart the counter and print a newline.
+      if (counter == 4)
+        counter = 0
+        print "\n"
+      end
+    end
+    # Prints the newline that should be there.
+    if (counter != 0)
+      print "\n"
     end
   end
 end
