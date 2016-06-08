@@ -2,6 +2,8 @@ require_relative '../Event/NPC/npc_zdrasvootyay.rb'
 require_relative '../Event/Shop/shop_zdrasvootyay.rb'
 require_relative '../Event/event.rb'
 require_relative '../Event/plant.rb'
+require_relative '../Event/pool.rb'
+require_relative '../Event/stove.rb'
 require_relative 'map.rb'
 require_relative 'tile.rb'
 
@@ -24,7 +26,7 @@ class Zdrasvootyay < Map
 			 Tile.new(true, [BananaDictionaryTree.new]),
 			 Tile.new(false),
 		   Tile.new(true), Tile.new(true),
-			 Tile.new(true, [RestEvent.new]),
+			 Tile.new(true, [RestEvent.new, Stove.new]),
 		   Tile.new(false)
 		  ],
 
@@ -50,21 +52,23 @@ class Zdrasvootyay < Map
 
 		  #5
 		  [Tile.new(false), Tile.new(false),
-			 Tile.new(true, [Fisherwoman.new]),
-		   Tile.new(true),
-			 Tile.new(true, [Fisherman.new]),
+			 Tile.new(true, [Fisherwoman.new, BluegillPool.new]),
+		   Tile.new(true, [BluegillPool.new]),
+			 Tile.new(true, [Fisherman.new, BluegillPool.new]),
 			 Tile.new(false),Tile.new(false)
 		  ],
 
 		  #6
 		  [Tile.new(false), Tile.new(false), Tile.new(false),
-		   Tile.new(false), Tile.new(true, [Russian.new]), Tile.new(false),
+		   Tile.new(false), Tile.new(true, [Russian.new, BluegillPool.new]), Tile.new(false),
 		   Tile.new(false)
 		  ],
 
 		  #7
 		  [Tile.new(false), Tile.new(false), Tile.new(false),
-		   Tile.new(false), Tile.new(true), Tile.new(true), 	#<-ship
+		   Tile.new(false),
+			 Tile.new(true, [BluegillPool.new]),
+			 Tile.new(true, [BluegillPool.new]), 	#<-ship
 		   Tile.new(false)
 		  ],
 

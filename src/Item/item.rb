@@ -1,5 +1,7 @@
 class Item
 
+  # Maybe it should return a Boolean value
+  # which says if it is consumed.
   def use(entity)
     puts "Nothing happens."
   end
@@ -17,6 +19,14 @@ class Bucket < Item
   def initialize
     @name = "Bucket"
     @price = 2
+  end
+end
+
+# Note to self: maybe it's just hidden Bait.
+class BurntFlub < Item
+  def initialize
+    @name = "Burnt Flub"
+    @price = 0
   end
 end
 
