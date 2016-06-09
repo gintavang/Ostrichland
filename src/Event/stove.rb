@@ -14,8 +14,8 @@ class Stove < Event
     # Ensures the Entity has something to cook.
     if (!entity_cookables.empty?)
       puts "Available to cook: "
-      entity_cookables.each do |bait|
-        puts "#{bait.first.name} (#{bait.second})"
+      entity_cookables.each do |cookable|
+        puts "#{cookable.first.name} (#{cookable.second})"
       end
 
       print "\nWhat would you like to cook?: "

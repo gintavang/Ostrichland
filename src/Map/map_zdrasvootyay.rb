@@ -1,6 +1,7 @@
 require_relative '../Event/NPC/npc_zdrasvootyay.rb'
 require_relative '../Event/Shop/shop_zdrasvootyay.rb'
 require_relative '../Event/event.rb'
+require_relative '../Event/gamble.rb'
 require_relative '../Event/plant.rb'
 require_relative '../Event/pool.rb'
 require_relative '../Event/stove.rb'
@@ -40,7 +41,7 @@ class Zdrasvootyay < Map
 			 Tile.new(true, [BananaTree.new]),
 			 Tile.new(false),
 		   Tile.new(true, [ZdrasShop.new]),
-			 Tile.new(true), Tile.new(true),
+			 Tile.new(true, [TopHatSlots.new]), Tile.new(true),
 		   Tile.new(false)
 		  ],
 
