@@ -29,7 +29,7 @@ class Entity
     end
     # If not already in the inventory, push a Couple.
     @inventory.push(Couple.new(item, amount))
-  end
+  end    
 
   # Requires an Item as the argument.
   # Returns the index of that item, if it exists.

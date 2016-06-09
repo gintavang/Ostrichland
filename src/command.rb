@@ -40,14 +40,28 @@ end
 def interpret_command(command, player)
   words = command.split
 
-  # Default ommands that take multiple "arguments" (words).
+  # Default commands that take multiple "arguments" (words).
   if (words.size > 1)
+
+    # Determine the name of the second "argument."
+    name = words[1]
+    for i in 2..(words.size - 1) do
+      name << " " << words[i]
+    end
+
+    # Determine the appropriate command to use.
     case(words[0])
-    when "use"
-      name = words[1]
-      for i in 2..(words.size - 1) do
-        name << " " << words[i]
+    when "drop"
+      index = player.has_item_by_string(name)
+      if (index != -1)
+        # Perhaps the player should be allowed to specify
+        # how many of the Item to drop.
+        item = player.inventory[index].first
+        player.remove_item(item, 1)
+      else
+        print "You can't drop what you don't have!\n\n"
       end
+    when "use"
       player.use_item_by_string(name, player)
     end
 
@@ -61,6 +75,7 @@ def interpret_command(command, player)
     when "map"
       player.print_player_map
     when "inv"
+      print "Current gold in pouch: #{player.gold}.\n\n"
       puts "Your inventory:"
       player.print_inventory
     when "status"
