@@ -6,8 +6,11 @@ class Entity
   def initialize(name, max_hp = 5, hp = 3,
     inventory = [], attacks = [], gold = 0)
     @name = name
+
     @max_hp = max_hp
     @hp = hp
+    @attack = 3
+    @defense = 2
 
     # Monsters can also use items in battle.
     @inventory = inventory
@@ -16,6 +19,9 @@ class Entity
     
     # Monsters might drop a percentage of this value.
     @gold = gold
+
+    @weapon = nil
+    @helmet = nil
   end
 
   # Adds the item and the given amount to the inventory.
@@ -79,6 +85,52 @@ class Entity
     @inventory.each do |couple|
       puts couple.first.name + " (#{couple.second})"
     end
+    print "\n"
+  end
+
+  # Prints the status in a nice format.
+  def print_status
+    puts "HP: #{hp}/#{max_hp}"
+    puts "Attack: #{attack}"
+    puts "Defense: #{defense}"
+    print "\n"
+
+    print "Weapon: "
+    if (!@weapon.nil?)
+      puts "#{weapon.name}"
+    else
+      puts "none"
+    end
+
+    print "Helmet: "
+    if (!@helmet.nil?)
+      puts "#{helmet.name}"
+    else
+      puts "none"
+    end
+
+    print "\n"
+  end
+
+  # If the item exists in the Entity's inventory,
+  # then it uses the item on Entity e.
+  def use_item_by_string(name, e)
+    index = has_item_by_string(name)
+    if (index != -1)
+      inventory[index].first.use(e)
+    else
+      print "What?! You don't have #{name}!\n\n"
+    end
+  end
+
+  def unequip_item_by_string(name)
+    if ((!@weapon.nil?) && name == @weapon.name)
+      @weapon.unequip(self)
+    elsif ((!@helmet.nil?) && name == @helmet.name)
+      @helmet.unequip(self)
+    else
+      print "You are not equipping #{name}!\n\n"
+    end
   end
 
   def attempt_attack(attack, enemy)
@@ -95,11 +147,17 @@ class Entity
   # Automatically creates getter and setter methods.
   attr_accessor :name
   attr_accessor :max_hp, :hp
+  attr_accessor :attack
+  attr_accessor :defense
 
   # The inventory is stored as an array
   # of Couple objects. The first data type
   # is the item's name. The second data type
   # is its count in the inventory.
   attr_accessor :inventory, :gold
+
+  # Maybe a dictionary/hash table would make unequip easier.
+  attr_accessor :weapon
+  attr_accessor :helmet
 
 end

@@ -26,7 +26,7 @@ class RestEvent < Event
 
   def run(entity)
     entity.hp = entity.max_hp
-    puts "#{entity.name}'s HP is fully restored!"
+    print "#{entity.name}'s HP is fully restored!\n\n"
   end
 
 end

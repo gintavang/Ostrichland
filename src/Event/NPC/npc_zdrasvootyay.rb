@@ -12,22 +12,22 @@ class Fisherman < NPC
     print "#{@name}: "
     if (entity.has_item_by_string("Fishing Pole") == -1)
       puts "You'll need a fishing pole if you want to fish here!"
-      puts "Don't forget bait! You can buy chubs at the shop in Zdasvootyay."
+      print "Don't forget bait! You can buy chubs at the shop in Zdasvootyay.\n\n"
     else
       puts "Hohohoho! Nice fishing pole!"
       print "Want some tips for fishing? (y/n): "
       input = gets.chomp
 
       if (input == "y")
-        puts "Good! The most important thing to remember is that"
+        puts "\nGood! The most important thing to remember is that"
         puts "certain locations require certain forms of bait."
         puts "For instance, the fish 'round here seem to like chubs."
         puts "Sometimes, you'll need to experiment with your bait..."
         puts "And you may not always catch a fish, but"
         puts "remember that practice makes perfect."
-        puts "Oh yeah, and you can sell or cook your fish!"
+        print "Oh yeah, and you can sell or cook your fish!\n\n"
       else
-        puts "You must be an expert! Goodbye!"
+        print "\nYou must be an expert! Goodbye!\n\n"
       end
     end
   end
@@ -43,7 +43,26 @@ class Fisherwoman < NPC
   def run(entity)
     print "#{@name}: "
     puts "This is my territory!"
-    puts "Don't even think about casting your line here!"
+    print "Don't even think about casting your line here!\n\n"
+  end
+end
+
+class Soldier < NPC
+  def initialize
+    super
+    @name = "Soldier"
+  end
+
+  def run(entity)
+    print "#{@name}: "
+    if (entity.weapon.nil?)
+      puts "Wait! There are monsters outside the city"
+      puts "walls. Be careful - you can purchase a weapon at"
+      puts "The Tools. Don't forget to equip the weapon with"
+      print "the 'use' command.\n\n"
+    else
+      print "Good day.\n\n"
+    end
   end
 end
 
@@ -58,7 +77,7 @@ class Russian < NPC
     if (entity.has_item_by_string("Russian-English Dictionary") == -1)
       puts "Не покупать горючее из магазина!"
       puts "Я продаю горючее дешево!\n"
-      puts "\nWell, you don't speak Russian. Time to move on..."
+      print "\nWell, you don't speak Russian. Time to move on...\n\n"
     else
       puts "Don't buyeen a fyoul from theet stoor!"
       puts "I seal fyoul own the chip!"
@@ -68,14 +87,14 @@ class Russian < NPC
       print "Interested? (y/n): "
       input = gets.chomp
       if (input == "y")
-        puts "Ind that well be 5 rubles, спасибо"
+        puts "\nInd that well be 5 rubles, спасибо"
         if (entity.gold >= 5)
           entity.gold -= 5
           entity.add_item(Fuel.new, 1)
           puts "You shake his large, greasy hand"
           puts "And head back down the road."
           puts "You notice that, even with the gallon of fuel,"
-          puts "Your load feels much lighter"
+          print "Your load feels much lighter\n\n"
           entity.remove_item(RussianDictionary.new, 1)
         else
           puts "Ой! Какой Кошмар... I should have been knowing"
@@ -83,10 +102,10 @@ class Russian < NPC
           print "you are a kozël. Пошёл на хуй!\n"
           puts "\nYou quickly high-tail it back to the road,"
           puts "as the relatively even tempered Russian fuel salesman"
-          puts "continues to lob obscenities and small fish at you from afar."
+          print "continues to lob obscenities and small fish at you from afar.\n\n"
         end
       else
-        puts "Will what, Are youl to doing here steel! Пошёл на хуй!"
+        print "\nWill what, Are youl to doing here steel! Пошёл на хуй!\n\n"
       end
     end
   end

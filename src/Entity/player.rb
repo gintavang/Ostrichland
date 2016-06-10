@@ -4,10 +4,10 @@ require_relative '../util.rb'
 
 class Player < Entity
 
-  def initialize(name)
+  def initialize(name, max_hp = 100, hp = 100)
     super
-    @max_hp = 100
-    @hp = 100
+    @max_hp = max_hp
+    @hp = hp
     @map = Zdrasvootyay.new
     @location = Couple.new(1,5)
     update_player_map

@@ -23,18 +23,21 @@ class Shop < Event
     @items.each do |item|
       puts item.name + " (#{item.price} gold)"
     end
+    print "\n"
   end
 
   def run(entity)
-    puts "Welcome to " + @name
+    puts "Welcome to #{@name}."
+    puts "Current gold in your pouch: #{entity.gold}."
     print "Would you like to buy, sell, or exit?: "
     input = gets.chomp
+    print "\n"
 
     while (input != "exit")
       if (input == "buy")
-        puts "Please take a look at my wares."
+        print "Please take a look at my wares.\n\n"
         print_items
-        print "What would you like (or none): "
+        print "What would you like (or none)?: "
 
         name = gets.chomp
         index = has_item(name)
@@ -49,57 +52,66 @@ class Shop < Event
 
           # The entity does not have enough gold.
           if (total_cost > entity.gold)
-            puts "You don't have enough gold!"
+            puts "\nYou don't have enough gold!"
+            print "You only have #{entity.gold}, but you need #{total_cost}!\n\n"
           # Otherwise, add the item(s) and subtract the gold.
           else
             # Checks that the Entity wants to buy at least 1.
             if (amount_to_buy.to_i < 1)
-              puts "Is this some kind of joke?"
-              puts "You need to request a positive amount!"
+              puts "\nIs this some kind of joke?"
+              print "You need to request a positive amount!\n\n"
             else
               entity.gold -= total_cost
               entity.add_item(item, amount_to_buy.to_i)
+              print "\nThank you for your patronage!\n\n"
             end
           end
         else
-          puts "I don't have #{name}!"
+          print "\nI don't have #{name}!\n\n"
         end
       elsif (input == "sell")
-        puts "Your inventory:"
-        entity.print_inventory
+        if (!entity.inventory.empty?)
+          puts "Your inventory:"
+          entity.print_inventory
 
-        print "What would you like to sell? (or none): "
-        name = gets.chomp
-        index = entity.has_item_by_string(name)
+          print "What would you like to sell? (or none): "
+          name = gets.chomp
+          index = entity.has_item_by_string(name)
 
-        if (name == "none")
-        # This check ensures that the Entity has such an item.
-        elsif ((index > -1) && (item_count = entity.inventory[index].second) > 0)
-          item = entity.inventory[index].first
-          puts "I'll buy that for " + (item.price / 2).to_s
-          print "How many do you want to sell?: "
-          amount_to_sell = gets.chomp
+          if (name == "none")
+          # This check ensures that the Entity has such an item.
+          elsif ((index > -1) && (item_count = entity.inventory[index].second) > 0)
+            item = entity.inventory[index].first
+            puts "I'll buy that for #{item.price / 2} gold."
+            print "How many do you want to sell?: "
+            amount_to_sell = gets.chomp
 
-          if (amount_to_sell.to_i > item_count)
-            puts "You don't have that many to sell!"
-          else
-            # Checks that the Entity wants to buy at least 1.
-            if (amount_to_sell.to_i < 1)
-              puts "Is this some kind of joke?"
-              puts "You need to sell a positive amount!"
+            if (amount_to_sell.to_i > item_count)
+              print "\nYou don't have that many to sell!\n\n"
             else
-              entity.gold += (item.price / 2) * amount_to_sell.to_i
-              entity.remove_item(item, amount_to_sell.to_i)
+              # Checks that the Entity wants to buy at least 1.
+              if (amount_to_sell.to_i < 1)
+                puts "\nIs this some kind of joke?"
+                print "You need to sell a positive amount!\n\n"
+              else
+                entity.gold += (item.price / 2) * amount_to_sell.to_i
+                entity.remove_item(item, amount_to_sell.to_i)
+                print "\nThank you for your patronage!\n\n"
+              end
             end
-          end
 
+          else
+            print "\nYou can't sell what you don't have.\n\n"
+          end
         else
-          puts "You can't sell what you don't have."
+          print "\nYou have nothing to sell!!\n\n"
         end
       end
 
+      puts "Current gold in your pouch: #{entity.gold}."
       print "Would you like to buy, sell, or exit?: "
       input = gets.chomp
+      print "\n"
     end
   end
 
