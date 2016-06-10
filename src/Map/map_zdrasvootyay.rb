@@ -26,13 +26,15 @@ class Zdrasvootyay < Map
 		  [Tile.new(false),
 			 Tile.new(true, [BananaDictionaryTree.new]),
 			 Tile.new(false),
-		   Tile.new(true), Tile.new(true),
+		   Tile.new(true, [TheTools.new]),
+			 Tile.new(true),
 			 Tile.new(true, [RestEvent.new, Stove.new]),
 		   Tile.new(false)
 		  ],
 
 		  #2
-		  [Tile.new(false), Tile.new(true), Tile.new(true),
+		  [Tile.new(false), Tile.new(true),
+			 Tile.new(true, [Soldier.new]),
 		   Tile.new(true), Tile.new(true), Tile.new(true),
 		   Tile.new(false)
 		  ],

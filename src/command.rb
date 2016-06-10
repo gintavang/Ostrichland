@@ -61,6 +61,8 @@ def interpret_command(command, player)
       else
         print "You can't drop what you don't have!\n\n"
       end
+    when "unequip"
+      player.unequip_item_by_string(name)
     when "use"
       player.use_item_by_string(name, player)
     end

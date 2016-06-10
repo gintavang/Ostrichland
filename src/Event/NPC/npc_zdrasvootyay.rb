@@ -47,6 +47,25 @@ class Fisherwoman < NPC
   end
 end
 
+class Soldier < NPC
+  def initialize
+    super
+    @name = "Soldier"
+  end
+
+  def run(entity)
+    print "#{@name}: "
+    if (entity.weapon.nil?)
+      puts "Wait! There are monsters outside the city"
+      puts "walls. Be careful - you can purchase a weapon at"
+      puts "The Tools. Don't forget to equip the weapon with"
+      print "the 'use' command.\n\n"
+    else
+      print "Good day.\n\n"
+    end
+  end
+end
+
 # Location: [6,4]
 class Russian < NPC
   def initialize
