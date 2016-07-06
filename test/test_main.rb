@@ -1,6 +1,7 @@
 require_relative '../src/driver.rb'
 require_relative '../src/Entity/player.rb'
 
+<<<<<<< HEAD
 # Set the Player's status variables.
 player = Player.new("Player1", 5, 1)
 

@@ -7,12 +7,15 @@ require_relative '../Event/pool.rb'
 require_relative '../Event/stove.rb'
 require_relative 'map.rb'
 require_relative 'tile.rb'
+require_relative '../Entity/monster.rb'
 
 class Zdrasvootyay < Map
 
 	def initialize
 
 		@name = "Zdrasvootyay"
+
+		@regen_location = Couple.new(1,5)
 
 		@tiles = [
 
@@ -33,7 +36,7 @@ class Zdrasvootyay < Map
 		  ],
 
 		  #2
-		  [Tile.new(false), Tile.new(true),
+		  [Tile.new(false), Tile.new(true, [], [HeadlessOstrich.new, RabidCockerSpaniel.new]),
 			 Tile.new(true, [Soldier.new]),
 		   Tile.new(true), Tile.new(true), Tile.new(true),
 		   Tile.new(false)

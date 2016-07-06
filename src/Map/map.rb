@@ -21,6 +21,6 @@ class Map
          "\n# - impassable space"
   end
 
-	attr_accessor :tiles, :name
+	attr_accessor :tiles, :name, :regen_location
 
 end

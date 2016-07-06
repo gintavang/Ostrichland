@@ -82,6 +82,9 @@ def interpret_command(command, player)
       player.print_inventory
     when "status"
       player.print_status
+    else 
+      puts "That isn't an available command at this time."
+      print "Type 'help' for a list of available commands.\n\n"
     end
   end
 
@@ -121,4 +124,5 @@ def prompt(player)
       print "\n"
     end
   end
+  #if ((!monsters.empty?))
 end

@@ -1,13 +1,13 @@
 class Tile
 
-	def initialize(passable, events = [])
+	def initialize(passable, events = [], monsters = [])
 		@passable = passable
 		@seen = false
 		#@description = description
 		@events = events
-		#@monsters = monster
+		@monsters = monsters
 	end
 
-	attr_accessor :passable, :seen, :events #:description
+	attr_accessor :passable, :seen, :events, :monsters
 
 end

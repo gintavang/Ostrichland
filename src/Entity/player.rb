@@ -2,6 +2,7 @@ require_relative 'entity.rb'
 require_relative '../Map/map_zdrasvootyay.rb'
 require_relative '../command.rb'
 require_relative '../util.rb'
+require_relative '../Attack/attack.rb'
 
 class Player < Entity
 
@@ -11,6 +12,7 @@ class Player < Entity
     @hp = hp
     @map = Zdrasvootyay.new
     @location = Couple.new(1,5)
+    @attacks = [Kick.new]
     update_player_map
   end
 
@@ -54,8 +56,6 @@ class Player < Entity
         print "You can't go that way!\n\n"
         #print possible directions
       end
-    else
-      puts "That ain't no D-recshun"
     end
 
   end
@@ -73,6 +73,16 @@ class Player < Entity
     @map.tiles[@location.first][@location.second - 1].seen = true
     @map.tiles[@location.first - 1][@location.second].seen = true
     @map.tiles[@location.first + 1][@location.second].seen = true
+
+    #TODO monster selection
+    if !(@map.tiles[@location.first][location.second].monsters.empty?)
+      here = @map.tiles[@location.first][location.second]
+      if (here.monsters.size == 1)
+          battle(self, here.monsters[0])
+      else 
+        battle(self, here.monsters[Random.rand(here.monsters.size)])
+      end
+    end
   end
 
   def print_player_map
@@ -108,4 +118,14 @@ class Player < Entity
          "\n# - impassable space" +
          "\n¶ - your location"
   end
+
+  def player_died
+    @location = @map.regen_location
+    puts "After being knocked out in battle, you wake up in #{@map.name}"
+    puts "Looks like you lost some gold..."
+    sleep(2)
+    @gold /= 2
+    @hp = @max_hp
+  end
+
 end
