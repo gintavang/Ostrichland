@@ -11,10 +11,10 @@ player.map = Zdrasvootyay.new
 player.location = Couple.new(1,5)
 
 # Set the Player's Inventory
-player.inventory = [Couple.new(RussianDictionary.new, 1)]
+player.inventory = [Couple.new(Stick.new, 1), Couple.new(Pillow.new, 1)]
 
 # Set the Player's Gold.
-player.gold = 2
+player.gold = 100
 
 prompt(player)
 print "> "
@@ -23,7 +23,6 @@ puts "\n"
 
 while (input != "q")
   interpret_command(input, player)
-  prompt(player)
   print "> "
   input = gets.chomp
   puts "\n"

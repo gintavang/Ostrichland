@@ -1,5 +1,6 @@
 require_relative 'entity.rb'
 require_relative '../Map/map_zdrasvootyay.rb'
+require_relative '../command.rb'
 require_relative '../util.rb'
 
 class Player < Entity
@@ -21,37 +22,42 @@ class Player < Entity
       if @map.tiles[@location.first][@location.second - 1].passable
         @location.second -= 1
         update_player_map
+        prompt(self)
       else
-        puts "You can't go that way!"
+        print "You can't go that way!\n\n"
         #print possible directions
       end
     when "e"
       if @map.tiles[@location.first][@location.second + 1].passable
         @location.second += 1
         update_player_map
+        prompt(self)
       else
-        puts "You can't go that way!"
+        print "You can't go that way!\n\n"
         #print possible directions
       end
     when "n"
       if @map.tiles[@location.first - 1][@location.second].passable
         @location.first -= 1
         update_player_map
+        prompt(self)
       else
-        puts "You can't go that way!"
+        print "You can't go that way!\n\n"
         #print possible directions
       end
     when "s"
       if @map.tiles[@location.first + 1][@location.second].passable
         @location.first += 1
         update_player_map
+        prompt(self)
       else
-        puts "You can't go that way!"
+        print "You can't go that way!\n\n"
         #print possible directions
       end
     else
       puts "That ain't no D-recshun"
     end
+
   end
 
   #call after each move

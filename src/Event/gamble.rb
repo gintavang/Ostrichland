@@ -36,17 +36,19 @@ class TopHatSlots < GambleEvent
     print "Would you like to try our slots (y/n)?: "
     input = gets.chomp
 
+    print "\n"
+
     while (input == "y")
 
       # Ensures the Entity has enough gold to play.
       if (entity.gold < 5)
-        print "\nYou don't have enough gold! Begone!\n\n"
+        print "You don't have enough gold! Begone!\n\n"
         return
       end
 
       entity.gold -= 5
 
-      print "\nThe slots are rolling!! Good luck!\n\n"
+      print "The slots are rolling!! Good luck!\n\n"
 
       symbols = ["¿", "Ƿ", "Ȣ", "λ", "Ɋ" ]
 
@@ -84,6 +86,8 @@ class TopHatSlots < GambleEvent
       puts "One roll is 5 gold."
       print "Would you like to try our slots (y/n)?: "
       input = gets.chomp
+
+      print "\n"
 
     end
   end
