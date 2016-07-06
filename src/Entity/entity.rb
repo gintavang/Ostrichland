@@ -1,4 +1,4 @@
-require_relative '../util.rb'
+require_relative '../util.rb' 
 
 class Entity
 
@@ -88,6 +88,21 @@ class Entity
     print "\n"
   end
 
+  def print_attacks_with_stats
+    @attacks.each do |attack|
+      puts attack.name + "\n  Damage: #{attack.damage}"
+      puts "  Success Rate: #{attack.success_rate}"
+    end
+    print "\n"
+  end
+
+  def print_attacks_simple
+    @attacks.each do |attack|
+      puts attack.name
+    end
+    print "\n"
+  end
+
   # Prints the status in a nice format.
   def print_status
     puts "HP: #{hp}/#{max_hp}"
@@ -133,14 +148,47 @@ class Entity
     end
   end
 
+  #attack must be in entity's attack array
+  #delete testing puts statements
   def attempt_attack(attack, enemy)
     if (Random.rand(100) < attack.success_rate)
-      enemy.hp -= attack.damage
-      print attack.name + " was successful and\n"
-      print "it brought " + enemy.name + "'s HP down to " enemy.hp
+
+      multiplier = 1
+      if enemy.defense > @attack
+        multipler = 1 - ((enemy.defense * 0.1) - (@attack * 0.1))
+        if multiplier < 0
+          multiplier = 0
+        end
+      else
+        multiplier = 1 + ((@attack * 0.1) - (enemy.defense * 0.1))
+      end
+
+      enemy.hp -= attack.damage * multiplier
+
+      if enemy.hp < 0
+        enemy.hp = 0
+      end
+
+      if multiplier > 0
+        puts @name + " uses #{attack.name} and it was successful,"
+        print "bringing #{enemy.name}'s HP down to #{enemy.hp.round(2)}."
+      else
+        puts "#{@name} uses #{attack.name}, but #{enemy.name}'s defense"
+        print "is so high that it didn't have any effect."
+      end
+      print "\n\n"
     else
-      print attack.name + " failed."
+      puts "#{@name} tries to use #{attack.name}, but it failed.\n\n"
     end
+  end
+
+  def has_attack_by_string(name)
+    @attacks.each_with_index do |attack, index|
+      if (attack.name.casecmp(name) == 0)
+        return index
+      end
+    end
+    return -1
   end
 
 
@@ -159,5 +207,8 @@ class Entity
   # Maybe a dictionary/hash table would make unequip easier.
   attr_accessor :weapon
   attr_accessor :helmet
+
+  attr_accessor :attacks
+
 
 end

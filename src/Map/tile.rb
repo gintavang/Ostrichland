@@ -5,7 +5,7 @@ class Tile
 		@seen = false
 		#@description = description
 		@events = events
-		@monsters = monster
+		@monsters = monsters
 	end
 
 	attr_accessor :passable, :seen, :events, :monsters
