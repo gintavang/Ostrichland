@@ -66,26 +66,23 @@ def interpret_command(command, player)
     when "use"
       player.use_item_by_string(name, player)
     end
+    return
+  end
 
   # Single-word default commands.
-  else
-    case(command)
-    when "w", "e", "n", "s"
-      player.move(command)
-    when "help"
-      help(player)
-    when "map"
-      player.print_player_map
-    when "inv"
-      print "Current gold in pouch: #{player.gold}.\n\n"
-      puts "Your inventory:"
-      player.print_inventory
-    when "status"
-      player.print_status
-    else 
-      puts "That isn't an available command at this time."
-      print "Type 'help' for a list of available commands.\n\n"
-    end
+  case(command)
+  when "w", "e", "n", "s"
+    player.move(command); return
+  when "help"
+    help(player); return
+  when "map"
+    player.print_player_map; return
+  when "inv"
+    print "Current gold in pouch: #{player.gold}.\n\n"
+    puts "Your inventory:"
+    player.print_inventory; return
+  when "status"
+    player.print_status; return
   end
 
   # Other commands.
@@ -96,6 +93,11 @@ def interpret_command(command, player)
       return
     end
   end
+
+  # Text for incorrect commands.
+  puts "That isn't an available command at this time."
+  print "Type 'help' for a list of available commands.\n\n"
+
 end
 
 # Prompts the player after each move.
