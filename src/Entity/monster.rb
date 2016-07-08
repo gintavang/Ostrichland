@@ -43,7 +43,7 @@ class RabidCockerSpaniel < Monster
 		@regen = true
 		@defense = 3
 		@attack = 13
-		@message = "#TODO\n"
+		@message = "GRRRRRRRRR\n"
 		@attacks = [FrothyBite.new, Uppercut.new]
 		@gold = Random.rand(3)
 		#@inventory = [Pillow.new, Stick.new]

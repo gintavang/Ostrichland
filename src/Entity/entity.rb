@@ -170,15 +170,15 @@ class Entity
       end
 
       if multiplier > 0
-        puts @name + " uses #{attack.name} and it was successful,"
-        print "bringing #{enemy.name}'s HP down to #{enemy.hp.round(2)}."
+        type(@name + " uses #{attack.name} and it was successful, ")
+        type("bringing #{enemy.name}'s HP down to #{enemy.hp.round(2)}.")
       else
-        puts "#{@name} uses #{attack.name}, but #{enemy.name}'s defense"
-        print "is so high that it didn't have any effect."
+        type("#{@name} uses #{attack.name}, but #{enemy.name}'s defense")
+        type("is so high that it didn't have any effect.")
       end
       print "\n\n"
     else
-      puts "#{@name} tries to use #{attack.name}, but it failed.\n\n"
+      type("#{@name} tries to use #{attack.name}, but it failed.\n\n")
     end
   end
 

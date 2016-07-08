@@ -28,7 +28,7 @@ end
 class FrothyBite < Attack
   def initialize
     @name = "Frothy Bite"
-    @message = "#TODO"
+    @message = "CHOMP!"
     @damage = 5
     @success_rate = 25
   end
@@ -37,18 +37,31 @@ end
 class Uppercut < Attack
   def initialize 
     @name = "Uppercut"
-    @message = "#TODO"
+    @message = "SWOOSH!"
     @damage = 5
     @success_rate = 80
   end
 end
 
+def print_attacks(player)
+  count = 0
+  player.attacks.each do |i|
+    if (count > 1)
+      print "\n"
+    end
+    print "❊ " + i.name + "  "
+    count += 1
+  end
+  print "\n\n"
+end
+
 def battle(player, monster)
   puts monster.message
-  puts "\nYou've run into a vicious #{monster.name}!\n\n"
+  type("\nYou've run into a vicious #{monster.name}!\n\n")
   while player.hp > 0
     #sleep 2
     puts "Choose an attack:"
+    print_attacks(player)
     print "> "
     input = gets.chomp
     puts "\n"
