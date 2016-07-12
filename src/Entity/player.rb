@@ -77,11 +77,11 @@ class Player < Entity
     #TODO monster selection
     if !(@map.tiles[@location.first][location.second].monsters.empty?)
       here = @map.tiles[@location.first][location.second]
-      system("clear")
-      if (here.monsters.size == 1)
-        battle(self, here.monsters[0])
-      else 
-        battle(self, here.monsters[Random.rand(here.monsters.size)])
+      #20% chance of monster appearing
+      monster_outcome = Random.rand(here.monsters.size * 5)
+      if (monster_outcome < here.monsters.size)
+        system("clear")
+        battle(self, here.monsters[monster_outcome])
       end
     end
   end
