@@ -35,7 +35,7 @@ class FrothyBite < Attack
 end
 
 class Uppercut < Attack
-  def initialize 
+  def initialize
     @name = "Uppercut"
     @message = "SWOOSH!"
     @damage = 5
@@ -97,4 +97,3 @@ def battle(player, monster)
     player_died
   end
 end
-

@@ -1,4 +1,4 @@
-require_relative '../util.rb' 
+require_relative '../util.rb'
 
 class Entity
 
@@ -16,7 +16,7 @@ class Entity
     @inventory = inventory
 
     @attacks = attacks
-    
+
     # Monsters might drop a percentage of this value.
     @gold = gold
 
@@ -56,7 +56,7 @@ class Entity
   # Otherwise, returns -1.
   def has_item_by_string(name)
     inventory.each_with_index do |couple, index|
-      if (couple.first.name == name)
+      if (name.casecmp(couple.first.name) == 0)
         return index
       end
     end
@@ -134,17 +134,17 @@ class Entity
     if (index != -1)
       inventory[index].first.use(e)
     else
-      print "What?! You don't have #{name}!\n\n"
+      print "What?! You don't have THAT!\n\n"
     end
   end
 
   def unequip_item_by_string(name)
-    if ((!@weapon.nil?) && name == @weapon.name)
+    if ((!@weapon.nil?) && name.casecmp(@weapon.name))
       @weapon.unequip(self)
-    elsif ((!@helmet.nil?) && name == @helmet.name)
+    elsif ((!@helmet.nil?) && name.casecmp(@helmet.name))
       @helmet.unequip(self)
     else
-      print "You are not equipping #{name}!\n\n"
+      print "You are not equipping THAT!\n\n"
     end
   end
 
@@ -155,7 +155,7 @@ class Entity
 
       multiplier = 1
       if enemy.defense > @attack
-        multipler = 1 - ((enemy.defense * 0.1) - (@attack * 0.1))
+        multiplier = 1 - ((enemy.defense * 0.1) - (@attack * 0.1))
         if multiplier < 0
           multiplier = 0
         end

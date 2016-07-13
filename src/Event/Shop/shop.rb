@@ -11,7 +11,7 @@ class Shop < Event
   # Otherwise, returns -1.
   def has_item(name)
     @items.each_with_index do |item, index|
-      if (item.name == name)
+      if (item.name.casecmp(name) == 0)
         return index
       end
     end
@@ -34,7 +34,7 @@ class Shop < Event
     print "\n"
 
     while (input != "exit")
-      if (input == "buy")
+      if (input.casecmp("buy") == 0)
         print "Please take a look at my wares.\n\n"
         print_items
         print "What would you like (or none)?: "
@@ -42,7 +42,7 @@ class Shop < Event
         name = gets.chomp
         index = has_item(name)
 
-        if (name == "none")
+        if (name.casecmp("none") == 0)
         # This check prevents creating a fake item.
         elsif (index != -1)
           item = @items[index]
@@ -69,7 +69,7 @@ class Shop < Event
         else
           print "\nI don't have #{name}!\n\n"
         end
-      elsif (input == "sell")
+      elsif (input.casecmp("sell") == 0)
         if (!entity.inventory.empty?)
           puts "Your inventory:"
           entity.print_inventory
@@ -78,7 +78,7 @@ class Shop < Event
           name = gets.chomp
           index = entity.has_item_by_string(name)
 
-          if (name == "none")
+          if (name.casecmp("none") == 0)
           # This check ensures that the Entity has such an item.
           elsif ((index > -1) && (item_count = entity.inventory[index].second) > 0)
             item = entity.inventory[index].first

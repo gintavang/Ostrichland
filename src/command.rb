@@ -38,7 +38,7 @@ def print_possible_moves(player)
 end
 
 def interpret_command(command, player)
-  words = command.split
+  words = command.split.map(&:downcase)
 
   # Default commands that take multiple "arguments" (words).
   if (words.size > 1)
@@ -88,7 +88,7 @@ def interpret_command(command, player)
   # Other commands.
   events = player.map.tiles[player.location.first][player.location.second].events
   events.each do |event|
-    if (event.visible && command == event.command)
+    if (event.visible && words[0] == event.command)
       event.run(player)
       return
     end

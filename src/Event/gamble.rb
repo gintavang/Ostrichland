@@ -38,7 +38,7 @@ class TopHatSlots < GambleEvent
 
     print "\n"
 
-    while (input == "y")
+    while (input.casecmp("y") == 0)
 
       # Ensures the Entity has enough gold to play.
       if (entity.gold < 5)

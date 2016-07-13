@@ -18,7 +18,7 @@ class Fisherman < NPC
       print "Want some tips for fishing? (y/n): "
       input = gets.chomp
 
-      if (input == "y")
+      if (input.casecmp("y") == 0)
         puts "\nGood! The most important thing to remember is that"
         puts "certain locations require certain forms of bait."
         puts "For instance, the fish 'round here seem to like chubs."
@@ -86,7 +86,7 @@ class Russian < NPC
       puts "Eet should to geeting you where you are gooing"
       print "Interested? (y/n): "
       input = gets.chomp
-      if (input == "y")
+      if (input.casecmp("y") == 0)
         puts "\nInd that well be 5 rubles, спасибо"
         if (entity.gold >= 5)
           entity.gold -= 5

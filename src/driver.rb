@@ -6,7 +6,7 @@ def run_driver(player)
   prompt(player)
   input = player_input
 
-  while (input != "q")
+  while (input.casecmp("quit") != 0)
     interpret_command(input, player)
     input = player_input
   end

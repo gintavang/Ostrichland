@@ -8,7 +8,7 @@ class Item
 
   # Equality operator.
   def ==(rhs)
-    return (@name == rhs.name)
+    return (@name.casecmp(rhs.name) == 0)
   end
 
   attr_accessor :name, :price
