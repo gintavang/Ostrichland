@@ -19,7 +19,7 @@ def type(message, max_line = 0)
   count = 0
   message.split("").each do |i|
     count += 1
-    sleep(0.035)
+    sleep(0.02)
     print i
     if (max_line != 0)
       if (i == " " && count > max_line)

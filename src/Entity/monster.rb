@@ -45,7 +45,7 @@ class RabidCockerSpaniel < Monster
 		@attack = 13
 		@message = "GRRRRRRRRR\n"
 		@attacks = [FrothyBite.new, Uppercut.new]
-		@gold = Random.rand(3)
+		@gold = Random.rand(5)
 		#@inventory = [Pillow.new, Stick.new]
 	end
 end
