@@ -139,9 +139,9 @@ class Entity
   end
 
   def unequip_item_by_string(name)
-    if ((!@weapon.nil?) && name.casecmp(@weapon.name))
+    if ((!@weapon.nil?) && name.casecmp(@weapon.name) == 0)
       @weapon.unequip(self)
-    elsif ((!@helmet.nil?) && name.casecmp(@helmet.name))
+    elsif ((!@helmet.nil?) && name.casecmp(@helmet.name) == 0)
       @helmet.unequip(self)
     else
       print "You are not equipping THAT!\n\n"

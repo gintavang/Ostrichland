@@ -6,12 +6,6 @@ class Couple
   attr_accessor :first, :second
 end
 
-# Receives input and converts it to downcase.
-# Should be used for receiving all user input.
-def get_input
-  gets.chomp.downcase
-end
-
 #prints text as if it were being typed
 #with optional maximum line setting
 #recommended max_line setting ~40
