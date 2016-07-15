@@ -171,9 +171,6 @@ class Entity
         multiplier *= weapon.power
       end
 
-      puts "multiplier: #{multiplier}\n"
-      puts "total damage: #{attack.damage * multiplier}"
-
       enemy.hp -= attack.damage * multiplier
 
       if enemy.hp < 0
