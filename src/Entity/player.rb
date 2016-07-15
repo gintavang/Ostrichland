@@ -74,15 +74,15 @@ class Player < Entity
     @map.tiles[@location.first - 1][@location.second].seen = true
     @map.tiles[@location.first + 1][@location.second].seen = true
 
-    #TODO monster selection
+    #TODO Uncomment
     if !(@map.tiles[@location.first][location.second].monsters.empty?)
       here = @map.tiles[@location.first][location.second]
       #20% chance of monster appearing
-      monster_outcome = Random.rand(here.monsters.size * 5)
-      if (monster_outcome < here.monsters.size)
+      monster_outcome = 1#Random.rand(here.monsters.size * 5)
+      #if (monster_outcome < here.monsters.size)
         system("clear")
         battle(self, here.monsters[monster_outcome])
-      end
+      #end
     end
   end
 
@@ -120,10 +120,22 @@ class Player < Entity
          "\n¶ - your location"
   end
 
+  def attempt_run(monster)
+    #the less hp a monster has, the higher prob. of run succeeding
+    #variables for readability
+    weakness = monster.hp/monster.max_hp
+    chance = (weakness * 5).to_i
+    if (Random.rand(chance) == 0)
+      return true
+    end
+    return false
+  end
+
+
   def player_died
     @location = @map.regen_location
-    puts "After being knocked out in battle, you wake up in #{@map.name}"
-    puts "Looks like you lost some gold..."
+    type("After being knocked out in battle, you wake up in #{@map.name}")
+    type("Looks like you lost some gold...")
     sleep(2)
     @gold /= 2
     @hp = @max_hp

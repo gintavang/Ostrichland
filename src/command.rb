@@ -5,6 +5,7 @@ def help(player)
   puts "n (north); s (south);"
   puts "e (east); w (west);"
   puts "help; map; inv; use [item]"
+  puts "status; attacks"
   events = player.map.tiles[player.location.first][player.location.second].events
   if (!(events.empty?))
     puts "~~$$$~~Special commands~~$$$~~"
@@ -83,6 +84,8 @@ def interpret_command(command, player)
     player.print_inventory; return
   when "status"
     player.print_status; return
+  when "attacks"
+    player.print_attacks_with_stats; return
   end
 
   # Other commands.

@@ -3,8 +3,10 @@ require_relative "../Entity/player.rb"
 require_relative "../Entity/monster.rb"
 
 class Attack
-
-	attr_accessor :name, :damage, :success_rate
+  def intitialize
+    @wpn_attack = false;
+  end
+	attr_accessor :name, :damage, :success_rate, :wpn_attack
 
 end
 
@@ -43,55 +45,57 @@ class Uppercut < Attack
   end
 end
 
-def print_attacks(player)
-  count = 0
-  player.attacks.each do |i|
-    if (count > 1)
-      print "\n"
-    end
-    print "❊ " + i.name + "  "
-    count += 1
-  end
-  print "\n\n"
-end
-
 def battle(player, monster)
   puts monster.message
   type("\nYou've run into a vicious #{monster.name}!\n\n")
   while player.hp > 0
-    #sleep 2
     puts "Choose an attack:"
-    print_attacks(player)
+    player.print_attacks
     print "> "
     input = gets.chomp
     puts "\n"
-    index = player.has_attack_by_string(input)
-    #input error loop
-    while (index == -1)
-      puts "You don't have the attack '#{input}'"
-      puts "Try one of these:"
-      player.print_attacks_simple
-      print "> "
-      input = gets.chomp
+
+    if (input.casecmp("Run") == 0)
+      if (attempt_run(monster))
+        type("You successfully escaped the clutches of the #{monster.name}!\n\n")
+        break
+      else
+        type("You're cornered!\n\n")
+      end
+    else
       index = player.has_attack_by_string(input)
+      #input error loop
+      while (index == -1 && input.casecmp("Run") != 0)
+        puts "You don't have the attack '#{input}'"
+        puts "Try one of these:"
+        player.print_attacks
+        print "> "
+        input = gets.chomp
+        index = player.has_attack_by_string(input)
+      end
+      #player move
+      if (input.casecmp("Run") != 0)
+        player.attempt_attack(@attacks[index], monster)
+      end
     end
-    #player move
-    player.attempt_attack(@attacks[index], monster)
+
     if (monster.hp > 0)
       monster.attempt_attack(monster.choose_attack, player)
     else
-    	puts "You defeated the #{monster.name}"
+    	type("You defeated the #{monster.name}\n")
       if (monster.gold > 0)
-        puts "and they dropped #{monster.gold} gold!"
+        type("and they dropped #{monster.gold} gold!\n")
         player.gold += monster.gold
       end
+      puts "\n"
       if monster.regen
         monster.hp = monster.max_hp
-        monster.gold = Random.rand(3)
+        monster.gold = Random.rand(monster.max_gold)
       end
       break
     end
   end
+  #remove equip attacks
   if (player.hp == 0)
     sleep(2)
     player_died

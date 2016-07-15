@@ -15,7 +15,7 @@ class Monster < Entity
 	# each time a monster is regenerated
 
 	
-	attr_accessor :visible, :regen, :message
+	attr_accessor :visible, :regen, :message, :max_gold
 end
 
 class HeadlessOstrich < Monster
@@ -30,6 +30,7 @@ class HeadlessOstrich < Monster
 		@message = "BLAAAARGGG\n"
 		@attacks = [PitifulGroan.new]
 		@gold = Random.rand(3)
+		@max_gold = 3
 		#@inventory = [Pillow.new]
 	end
 end
@@ -46,6 +47,7 @@ class RabidCockerSpaniel < Monster
 		@message = "GRRRRRRRRR\n"
 		@attacks = [FrothyBite.new, Uppercut.new]
 		@gold = Random.rand(5)
+		@max_gold = 5
 		#@inventory = [Pillow.new, Stick.new]
 	end
 end

@@ -96,11 +96,16 @@ class Entity
     print "\n"
   end
 
-  def print_attacks_simple
-    @attacks.each do |attack|
-      puts attack.name
+  def print_attacks
+    count = 0
+    attacks.each do |i|
+      if (count > 1)
+        print "\n"
+      end
+      print "❊ " + i.name + "  "
+      count += 1
     end
-    print "\n"
+    print "\n❊ Run\n\n"
   end
 
   # Prints the status in a nice format.
@@ -149,7 +154,6 @@ class Entity
   end
 
   #attack must be in entity's attack array
-  #delete testing puts statements
   def attempt_attack(attack, enemy)
     if (Random.rand(100) < attack.success_rate)
 
@@ -162,6 +166,13 @@ class Entity
       else
         multiplier = 1 + ((@attack * 0.1) - (enemy.defense * 0.1))
       end
+
+      if (attack.wpn_attack)
+        multiplier *= weapon.power
+      end
+
+      puts "multiplier: #{multiplier}\n"
+      puts "total damage: #{attack.damage * multiplier}"
 
       enemy.hp -= attack.damage * multiplier
 
@@ -190,6 +201,7 @@ class Entity
     end
     return -1
   end
+
 
 
   # Automatically creates getter and setter methods.
